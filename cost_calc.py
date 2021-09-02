@@ -1,7 +1,6 @@
 # Sashin Amichand 2021/09/01 
 # First personal python project! It is a simple GUI app that will allow me to calculate costs for products with GST included. Now includes a USD/AUD converter to NZD!
 # Next goal: Include a calculator
-
 import tkinter as tk
 from tkinter import ttk
 import bs4, requests
@@ -22,9 +21,8 @@ shipping_cost = tk.IntVar()
 # Variables for currency conversion
 USD_rate = soup.find_all('td')[2].text # The number is = to the table position
 AUD_rate = soup.find_all('td')[14].text
-currency = {"USD": Decimal(USD_rate), "AUD": Decimal(AUD_rate)}
+currency = {"Currency": '', "USD": Decimal(USD_rate), "AUD": Decimal(AUD_rate)}
 conversion = tk.StringVar()
-conversion.set("Currency")
 convert_amount = tk.IntVar()
 
 # Variables for styling
@@ -66,12 +64,15 @@ lblShipping.grid(row=3, column=1, sticky="w", padx=5, pady=10)
 
 shippingEntry = ttk.Entry(mainFrame, textvariable=shipping_cost, width=5, font=(font_entry))
 shippingEntry.grid(row=3, column=2, sticky="w")
+shippingEntry.bind("<Return>", (lambda event: calculation()))
+
 
 conversionOption = ttk.OptionMenu(mainFrame, conversion, *currency)
 conversionOption.grid(row=6, column=0, sticky="e", padx=10, pady=5)
 
 conversionEntry = ttk.Entry(mainFrame, textvariable=convert_amount, width=5, font=(font_entry))
 conversionEntry.grid(row=6, column=1, sticky="ew", padx=4)
+conversionEntry.bind("<Return>", (lambda event: convert()))
 
 # Functions
 def calculation():
