@@ -1,4 +1,4 @@
-# Sashin Amichand 2021/09/01 
+# 2021/09/01 
 # First personal python project! It is a simple GUI app that will allow me to calculate costs for products with GST included. Now includes a USD/AUD converter to NZD!
 # Next goal: Include a calculator
 import os 
