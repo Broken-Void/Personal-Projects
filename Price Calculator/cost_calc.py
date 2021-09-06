@@ -1,11 +1,12 @@
 # Sashin Amichand 2021/09/01 
 # First personal python project! It is a simple GUI app that will allow me to calculate costs for products with GST included. Now includes a USD/AUD converter to NZD!
 # Next goal: Include a calculator
+import os 
 import tkinter as tk
 from tkinter import ttk
 from decimal import Decimal
 
-class PriceCalculator:
+class ShoppingCalculator:
     def __init__(self, master):
         self.master = master
 
@@ -37,7 +38,7 @@ class PriceCalculator:
     def get_rates(self):
         import bs4, requests
         
-        converter = requests.get("https://www.x-rates.com/table/?from=NZD&amount=1") # X-rates is the website in which I source the conversion rates.
+        converter = requests.get("https://www.x-rates.com/table/?from=NZD&amount=1") # X-rates is the website in which I source the conversion rates, all rights are theirs.
         soup = bs4.BeautifulSoup(converter.content, 'html.parser')
 
         self.USD_rate = soup.find_all('td')[2].text # The [number] is = to the table position
@@ -103,7 +104,6 @@ class PriceCalculator:
     def calculate_conversion(self):
         new_conversion = self.conversion.get()    
         new_amount = self.conversion_amount.get()
-        
         try:
             new_cost = new_amount * self.currency[new_conversion]
         except TypeError:
@@ -117,8 +117,9 @@ class PriceCalculator:
         return
 
 if __name__ == "__main__":
+    os.chdir(os.path.dirname(__file__)) # Ensures directory is right so that the icon does not cause issues.
     root = tk.Tk()
-    root.title("Price Calculator")
-    root.iconbitmap('logo.ico')
-    PriceCalculator(root)
+    root.title("Shopping Calculator")
+    root.iconbitmap('logo.ico') # The image used is not mine and all rights go to the rightful owner.
+    ShoppingCalculator(root)
     root.mainloop()    
