@@ -11,9 +11,9 @@ class ShoppingCalculator:
         self.master = master
 
         # Variables for styling
-        self.bg_color = '#3a3657'
+        self.bg_color = '#593C8F'
         self.master.configure(background=self.bg_color)
-        self.txt_color = "#9580ff"
+        self.txt_color = "#FFD9CE"
         self.font_txt = 'Cormorant', 12, ''
         self.font_output = 'Cormorant', '12', 'bold'
         self.font_entry = 'Cormorant', 10, ''
